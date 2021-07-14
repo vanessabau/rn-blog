@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   FlatList,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { Context } from "../context/BlogContext";
@@ -15,10 +14,6 @@ const IndexScreen = ({ navigation }) => {
     useContext(Context);
   return (
     <View>
-      <Button
-        title="Add Post"
-        onPress={addBlogPost}
-      />
       <FlatList
         data={state}
         keyExtractor={(blogPost) =>
@@ -54,6 +49,23 @@ const IndexScreen = ({ navigation }) => {
       />
     </View>
   );
+};
+
+IndexScreen.navigationOptions = ({
+  navigation,
+}) => {
+  // Use this object to customize the Header
+  return {
+    headerRight: () => (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Create")
+        }
+      >
+        <Feather name="plus" size={30} />
+      </TouchableOpacity>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
